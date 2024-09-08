@@ -1,12 +1,15 @@
-﻿namespace CineWaveAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CineWaveAPI.Models
 {
-    public class Insights
+    public class InsightMock
     {
+        [Key]
         public int Id { get; set; }
         public string MovieTitle { get; set; }
         public int RoiForecast { get; set; }
         public string MarketingChanne { get; set; }
-        public float AverageCostPerClick { get; set; }
+        public double AverageCostPerClick { get; set; }
         public int ConversionPrediction { get; set; }
     }
 }
