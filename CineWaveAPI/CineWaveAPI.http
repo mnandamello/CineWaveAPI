@@ -1,0 +1,6 @@
+@CineWaveAPI_HostAddress = http://localhost:5078
+
+GET {{CineWaveAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
