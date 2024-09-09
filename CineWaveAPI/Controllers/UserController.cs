@@ -16,6 +16,11 @@ namespace CineWaveAPI.Controllers
             _userRepository = userRepository;
         }
 
+        /// <summary>
+        /// Método para pegar o usuário pelo id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int}")]
         public async Task<ActionResult<User>> GetUserById(int id)
         {
@@ -33,6 +38,11 @@ namespace CineWaveAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Método para pegar TODOS os usuário
+        /// </summary>
+        /// <returns></returns>
+
         [HttpGet]
         public async Task<ActionResult<User>> GetUsers()
         {
@@ -46,8 +56,13 @@ namespace CineWaveAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Método para CRIAR um usuario
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<User>> AddEmpregados([FromBody] User user)
+        public async Task<ActionResult<User>> CreateUser([FromBody] User user)
         {
 
             try
@@ -65,7 +80,11 @@ namespace CineWaveAPI.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Método para EDITAR um usuário
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<User>> UpdateUser([FromBody] User user)
         {
@@ -88,6 +107,10 @@ namespace CineWaveAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Método para DELETAR um usuário
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id:int}")]
         public void DeleteUser(int id)
         {
