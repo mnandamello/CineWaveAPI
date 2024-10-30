@@ -23,7 +23,7 @@ namespace CineWaveAPI.Data
                     Id = 1,
                     MovieTitle = "Gafield 2",
                     RoiForecast = 250000,
-                    MarketingChanne = "TikTok",
+                    MarketingChannel = "TikTok",
                     AverageCostPerClick = 1.5,
                     ConversionPrediction = 250,
 
@@ -34,7 +34,7 @@ namespace CineWaveAPI.Data
                     Id = 2,
                     MovieTitle = "Moana 2",
                     RoiForecast = 10000000,
-                    MarketingChanne = "Instagram",
+                    MarketingChannel = "Instagram",
                     AverageCostPerClick = 1.3,
                     ConversionPrediction = 340,
 

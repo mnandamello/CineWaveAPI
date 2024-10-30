@@ -29,3 +29,65 @@
 
 ## OQUE FOI IMPLEMENTADO?
 	- CRUD do usuário
+
+
+	        public CampanhaRepository(DataContext dataContext, UserRepository userRepository)
+        {
+            this.dataContext = dataContext;
+            this.userRepository = userRepository;
+        }
+
+        public async Task<Campanha> AddCampanha(Campanha campanha)
+        {
+            var user = userRepository.GetUserById(campanha.UserId);
+
+            if (user == null) return null;
+
+            var result = await dataContext.Campanhas.AddAsync(campanha);
+            await dataContext.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task<Campanha> GetCampanha(int id)
+        {
+            return await dataContext.Campanhas.FirstOrDefaultAsync(x => x.Id == id);;
+        }
+
+        public async Task<IEnumerable<Campanha>> GetCampanhas()
+        {
+            return await dataContext.Campanhas.ToListAsync();
+        }
+
+        public async Task<List<Campanha>> GetCampanhaByUser(string id)
+        {
+            return await dataContext.Campanhas.Where(u => u.UserId == id).ToListAsync();
+        }
+
+        public async Task<Campanha> UpdateCampanha(Campanha campanha)
+        {
+            var result = await dataContext.Campanhas.FirstOrDefaultAsync(d => d.Id == campanha.Id);
+
+            if (result != null)
+            {
+                result.MovieTitle = campanha.MovieTitle;
+                result.MovieName = campanha.MovieName;
+                result.GenderMovie = campanha.GenderMovie;
+                result.AgeRange = campanha.AgeRange;
+                result.Budget = campanha.Budget;
+                result.ReachExpectations = campanha.ReachExpectations;
+                result.UserId = campanha.UserId;   
+            }
+
+            await dataContext.SaveChangesAsync();
+            return result;
+        }
+        public async void DeleteCampanha(int id)
+        {
+            var result = await dataContext.Campanhas.FirstOrDefaultAsync(d => d.Id == id);
+
+            if (result != null)
+            {
+                dataContext.Remove(result);
+                await dataContext.SaveChangesAsync();
+            }
+        }

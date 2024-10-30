@@ -51,8 +51,9 @@ namespace CineWaveAPI.Migrations
                     b.Property<int>("ReachExpectations")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.HasKey("Id");
 
@@ -73,7 +74,7 @@ namespace CineWaveAPI.Migrations
                     b.Property<int>("ConversionPrediction")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<string>("MarketingChanne")
+                    b.Property<string>("MarketingChannel")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
@@ -94,7 +95,7 @@ namespace CineWaveAPI.Migrations
                             Id = 1,
                             AverageCostPerClick = 1.5,
                             ConversionPrediction = 250,
-                            MarketingChanne = "TikTok",
+                            MarketingChannel = "TikTok",
                             MovieTitle = "Gafield 2",
                             RoiForecast = 250000
                         },
@@ -103,7 +104,7 @@ namespace CineWaveAPI.Migrations
                             Id = 2,
                             AverageCostPerClick = 1.3,
                             ConversionPrediction = 340,
-                            MarketingChanne = "Instagram",
+                            MarketingChannel = "Instagram",
                             MovieTitle = "Moana 2",
                             RoiForecast = 10000000
                         });
@@ -111,20 +112,13 @@ namespace CineWaveAPI.Migrations
 
             modelBuilder.Entity("CineWaveAPI.Models.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<bool>("IsActived")
-                        .HasColumnType("NUMBER(1)");
+                        .HasColumnType("NVARCHAR2(450)");
 
                     b.Property<string>("Password")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Uid")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
@@ -132,7 +126,7 @@ namespace CineWaveAPI.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Email");
 
                     b.ToTable("Users");
                 });

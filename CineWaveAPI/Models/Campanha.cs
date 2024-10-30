@@ -18,6 +18,6 @@ namespace CineWaveAPI.Models
         public float Budget { get; set; }
         [Required]
         public int ReachExpectations { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

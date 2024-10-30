@@ -1,6 +1,5 @@
 ﻿using CineWaveAPI.Models;
 using CineWaveAPI.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CineWaveAPI.Controllers
@@ -21,8 +20,8 @@ namespace CineWaveAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<User>> GetUserById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUserById(string id)
         {
             try
             {
@@ -56,65 +55,5 @@ namespace CineWaveAPI.Controllers
             }
         }
 
-        /// <summary>
-        /// Método para CRIAR um usuario
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<User>> CreateUser([FromBody] User user)
-        {
-
-            try
-            {
-                if (user == null) return BadRequest();
-
-                var userCreated = await _userRepository.CreateUser(user);
-
-                return CreatedAtAction(nameof(GetUserById),
-                    new { id = userCreated.Id }, userCreated);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Método para EDITAR um usuário
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<User>> UpdateUser([FromBody] User user)
-        {
-            try
-            {
-                if (user == null) return BadRequest();
-
-                var userToUpdate = await _userRepository.GetUserById(user.Id);
-                if (userToUpdate == null) return BadRequest("User não encontrado");
-
-                var result = await _userRepository.UpdateUser(user);
-
-                if (result == null) return BadRequest();
-
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Método para DELETAR um usuário
-        /// </summary>
-        /// <param name="id"></param>
-        [HttpDelete("{id:int}")]
-        public void DeleteUser(int id)
-        {
-            _userRepository.DeleteUser(id);
-        }
     }
 }
